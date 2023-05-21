@@ -1,0 +1,32 @@
+eureka:
+   client:
+      register-with-eureka: true
+      fetch-registry: true
+      serviceUrl:
+         defaultZone: http://localhost:8761/eureka/
+   instance:
+          instance-id: ${spring.application.name}:${instanceId:${random.value}}
+          hostname: localhost
+         
+spring:
+   datasource:   
+      url: jdbc:postgresql://localhost:5432/microservices
+      username: postgres
+      password: sriram
+   jpa:
+      hibernate:
+          ddl-auto: update
+      show-sql: true  
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect     
+            
+microservice:
+        payment-service:
+           endpoints:
+              endpoint:
+                  uri: http://PAYMENT-SERVICE/api/v1/payment/
+        auth-service:
+           endpoints:
+              endpoint:
+                  uri: http://AUTH-SERVICE//api/auth/v1/validate-api
